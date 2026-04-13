@@ -6,6 +6,13 @@ class Usuario:
 
     def solicitar_libro(self, titulo):
         return f"La solicitud de libro '{titulo}' realizada"
+    
+    def devolver_libro(self, titulo):
+        if titulo in self.libros_prestados:
+            self.libros_prestados.remove(titulo)
+            return f"Titulo {titulo} devuelto con exito"
+        else:
+            return f"Titulo no encontrado {titulo}"
 
 
 class Estudiante(Usuario):
@@ -40,3 +47,7 @@ print(profesor.solicitar_libro("Python básico"))
 print(profesor.solicitar_libro("Python Intermedio"))
 print(profesor.solicitar_libro("Python Avanzado"))
 print(profesor.solicitar_libro("Python / django"))
+
+print(estudiante.devolver_libro("El arte de la guerra"))
+print(profesor.devolver_libro("El arte de la guerra"))
+print(profesor.devolver_libro("Python básico"))
