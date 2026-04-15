@@ -3,57 +3,12 @@ from exceptions import BibliotecaError, LibroNoDisponibleError
 from libros import Libro, LibroDigital, LibroFisico
 from usuarios import Estudiante, Profesor
 from exceptions import UsuarioNoEncontradoError
+from data import data_libros, data_estudiantes
 
-mi_libro = Libro(
-    "100 años de soledad", "Gabriel Garcia Marquez", "978-8420471839", True
-)
-otro_libro = LibroFisico("El Principito", "Saint-Exupéry", " 978-6073803762", True)
-otro_libro_2 = LibroDigital("El arte de la guerra", "Sun Tzu", " " \
-"9798375541266", False)
-
-try:
-    print(mi_libro.prestar())
-    print(mi_libro.prestar())
-except LibroNoDisponibleError:
-    print("El libro no esta disponible")
-
-# print(mi_libro.devolver())
-
-# lista_libros = [mi_libro, otro_libro]
-
-# for libro in lista_libros:
-#     print(libro)
-
-biblioteca = Biblioteca("")
-biblioteca.libros.append(mi_libro)
-biblioteca.libros.append(otro_libro)
-biblioteca.libros.append(otro_libro_2)
-
-print(biblioteca.libros_disponibles())
-
-
-estudiante =Estudiante("Luis","1212121","Sistemas")
-estudiante_1 =Estudiante("Jose","77520","Salud")
+biblioteca = Biblioteca("Platzi Biblioteca")
 profesor = Profesor("Felipe","2122121")
-
-biblioteca.usuarios = [estudiante, estudiante_1, profesor]
-
-# for usuario in usuarios:
-#     print(usuario.solicitar_libro("Titulo de ejemplo"))
-
-# print(profesor.solicitar_libro("Python básico"))
-# print(profesor.solicitar_libro("Python Intermedio"))
-# print(profesor.solicitar_libro("Python Avanzado"))
-# print(profesor.solicitar_libro("Python / django"))
-
-# print(estudiante.devolver_libro("El arte de la guerra"))
-# print(profesor.devolver_libro("El arte de la guerra"))
-# print(profesor.devolver_libro("Python básico"))
-
-# try:
-#     resultado = estudiante_1.solicitar_libro(None)
-# except BibliotecaError:
-#     print("Error: No se pudo solicitar el libro")
+biblioteca.usuarios = [profesor] + data_estudiantes
+biblioteca.libros = data_libros
 
 print("Bienvenido a Platzi Biblioteca")
 
@@ -63,3 +18,19 @@ try:
     print(usuario.cedula, usuario.nombre)
 except UsuarioNoEncontradoError:
     print("El usuario no fue encontrado")
+
+try: 
+    titulo = input("digita el titulo del libro: ")
+    libro = biblioteca.buscar_libro(titulo)
+    print(f"El libro que seleccionaste es: {libro}")
+except LibroNoDisponibleError as e:
+    print(e)
+
+resultado = usuario.solicitar_libro(libro.titulo)
+print(f"\n{resultado}")
+
+try:
+    resultado_prestar = libro.prestar()
+    print(f"\n{resultado_prestar}")
+except LibroNoDisponibleError as e:
+    print(e)
