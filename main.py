@@ -1,4 +1,5 @@
 from biblioteca import Biblioteca
+from exceptions import BibliotecaError, LibroNoDisponibleError
 from libros import Libro, LibroDigital, LibroFisico
 from usuarios import Estudiante, Profesor
 
@@ -9,7 +10,12 @@ otro_libro = LibroFisico("El Principito", "Saint-Exupéry", " 978-6073803762", T
 otro_libro_2 = LibroDigital("El arte de la guerra", "Sun Tzu", " " \
 "9798375541266", False)
 
-# print(mi_libro.prestar())
+try:
+    print(mi_libro.prestar())
+    print(mi_libro.prestar())
+except LibroNoDisponibleError:
+    print("El libro no esta disponible")
+
 # print(mi_libro.devolver())
 
 # lista_libros = [mi_libro, otro_libro]
@@ -42,3 +48,8 @@ for usuario in usuarios:
 # print(estudiante.devolver_libro("El arte de la guerra"))
 # print(profesor.devolver_libro("El arte de la guerra"))
 # print(profesor.devolver_libro("Python básico"))
+
+try:
+    resultado = estudiante_1.solicitar_libro(None)
+except BibliotecaError:
+    print("Error: No se pudo solicitar el libro")

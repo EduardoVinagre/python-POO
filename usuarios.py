@@ -1,4 +1,5 @@
 from typing import Protocol
+from exceptions import LibroNotFoundError
 
 class SolicitanteProtocol(Protocol):
     def solicitar_libro(self, titulo: str) ->str:
@@ -29,6 +30,9 @@ class Estudiante(Usuario):
         self.limite_libros = 3
 
     def solicitar_libro(self, titulo):
+        if not titulo:
+            raise LibroNotFoundError(f"El libro con el título {titulo} no es válido")
+        
         if len(self.libros_prestados) < self.limite_libros:
             self.libros_prestados.append(titulo)
             return super().solicitar_libro(titulo)
