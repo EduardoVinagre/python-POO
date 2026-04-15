@@ -45,22 +45,3 @@ class Profesor(Usuario):
     def solicitar_libro(self, titulo):
         self.libros_prestados.append(titulo)
         return super().solicitar_libro(titulo)
-    
-
-estudiante =Estudiante("Luis","1212121","Sistemas")
-estudiante_1 =Estudiante("Jose","77520","Salud")
-profesor = Profesor("Felipe","2122121")
-
-usuarios = [estudiante, estudiante_1, profesor]
-
-for usuario in usuarios:
-    print(usuario.solicitar_libro("Titulo de ejemplo"))
-
-# print(profesor.solicitar_libro("Python básico"))
-# print(profesor.solicitar_libro("Python Intermedio"))
-# print(profesor.solicitar_libro("Python Avanzado"))
-# print(profesor.solicitar_libro("Python / django"))
-
-# print(estudiante.devolver_libro("El arte de la guerra"))
-# print(profesor.devolver_libro("El arte de la guerra"))
-# print(profesor.devolver_libro("Python básico"))

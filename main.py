@@ -1,75 +1,12 @@
-from typing import Protocol
-
-
-class LibroProtocol(Protocol):
-    def prestar(self) -> str:
-        ...
-
-    def devolver(self) -> str:
-        ...
-
-    def calcular_duracion(self) -> str:
-        ...
-
-class Libro:
-    def __init__(self, titulo: str, autor, isbn: str, disponible: bool):
-        self.titulo = titulo
-        self.autor = autor
-        self.isbn = isbn
-        self.disponible = disponible
-        self.__veces_prestado = 0
-
-    def __str__(self) -> str:
-        return f"{self.titulo} {self.autor} {self.isbn} {self.disponible} Es popular: {self.es_popular()}"
-
-    def prestar(self):
-        if self.disponible:
-            self.disponible = False
-            self.veces_prestado += 1
-            return f"'{self.titulo}' prestado exitosamente. Prestado {self.__veces_prestado}"
-        return f"'{self.titulo}' no esta disponible"
-
-    def devolver(self):
-        self.disponible = True
-        return f"'{self.titulo}' devuelto y disponible nuevamente"
-
-    def es_popular(self):
-        if self.__veces_prestado > 5:
-            return True
-        return False
-
-    def get_veces_prestado(self):
-        return self.__veces_prestado
-
-    def set_veces_prestado(self, veces_prestado):
-        self.__veces_prestado = veces_prestado
-
-
-class LibroFisico(Libro):
-    def calcular_duracion(self):
-        return "7 dias"
-    
-
-class LibroDigital(Libro):
-    def calcular_duracion(self):
-        return "14 días"
-
-
-class Biblioteca:
-    def __init__(self, name) -> None:
-        self.name = name
-        self.libros = []
-        self.usuarios = []
-
-    def libros_disponibles(self):
-        return [libro.titulo for libro in self.libros if libro.disponible]
-
+from biblioteca import Biblioteca
+from libros import Libro, LibroDigital, LibroFisico
+from usuarios import Estudiante, Profesor
 
 mi_libro = Libro(
     "100 años de soledad", "Gabriel Garcia Marquez", "978-8420471839", True
 )
-otro_libro = Libro("El Principito", "Saint-Exupéry", " 978-6073803762", True)
-otro_libro_2 = Libro("El arte de la guerra", "Sun Tzu", " " \
+otro_libro = LibroFisico("El Principito", "Saint-Exupéry", " 978-6073803762", True)
+otro_libro_2 = LibroDigital("El arte de la guerra", "Sun Tzu", " " \
 "9798375541266", False)
 
 # print(mi_libro.prestar())
@@ -86,3 +23,22 @@ biblioteca.libros.append(otro_libro)
 biblioteca.libros.append(otro_libro_2)
 
 print(biblioteca.libros_disponibles())
+
+
+estudiante =Estudiante("Luis","1212121","Sistemas")
+estudiante_1 =Estudiante("Jose","77520","Salud")
+profesor = Profesor("Felipe","2122121")
+
+usuarios = [estudiante, estudiante_1, profesor]
+
+for usuario in usuarios:
+    print(usuario.solicitar_libro("Titulo de ejemplo"))
+
+# print(profesor.solicitar_libro("Python básico"))
+# print(profesor.solicitar_libro("Python Intermedio"))
+# print(profesor.solicitar_libro("Python Avanzado"))
+# print(profesor.solicitar_libro("Python / django"))
+
+# print(estudiante.devolver_libro("El arte de la guerra"))
+# print(profesor.devolver_libro("El arte de la guerra"))
+# print(profesor.devolver_libro("Python básico"))
