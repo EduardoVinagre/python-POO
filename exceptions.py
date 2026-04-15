@@ -7,3 +7,6 @@ class LibroNotFoundError(BibliotecaError):
 
 class LibroNoDisponibleError(Exception):
     pass
+
+class UsuarioNoEncontradoError(Exception):
+    pass

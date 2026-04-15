@@ -2,6 +2,7 @@ from biblioteca import Biblioteca
 from exceptions import BibliotecaError, LibroNoDisponibleError
 from libros import Libro, LibroDigital, LibroFisico
 from usuarios import Estudiante, Profesor
+from exceptions import UsuarioNoEncontradoError
 
 mi_libro = Libro(
     "100 años de soledad", "Gabriel Garcia Marquez", "978-8420471839", True
@@ -35,10 +36,10 @@ estudiante =Estudiante("Luis","1212121","Sistemas")
 estudiante_1 =Estudiante("Jose","77520","Salud")
 profesor = Profesor("Felipe","2122121")
 
-usuarios = [estudiante, estudiante_1, profesor]
+biblioteca.usuarios = [estudiante, estudiante_1, profesor]
 
-for usuario in usuarios:
-    print(usuario.solicitar_libro("Titulo de ejemplo"))
+# for usuario in usuarios:
+#     print(usuario.solicitar_libro("Titulo de ejemplo"))
 
 # print(profesor.solicitar_libro("Python básico"))
 # print(profesor.solicitar_libro("Python Intermedio"))
@@ -49,7 +50,16 @@ for usuario in usuarios:
 # print(profesor.devolver_libro("El arte de la guerra"))
 # print(profesor.devolver_libro("Python básico"))
 
+# try:
+#     resultado = estudiante_1.solicitar_libro(None)
+# except BibliotecaError:
+#     print("Error: No se pudo solicitar el libro")
+
+print("Bienvenido a Platzi Biblioteca")
+
+cedula = input("Digite el numero de cedula: ")
 try:
-    resultado = estudiante_1.solicitar_libro(None)
-except BibliotecaError:
-    print("Error: No se pudo solicitar el libro")
+    usuario = biblioteca.buscar_usuario(cedula)
+    print(usuario.cedula, usuario.nombre)
+except UsuarioNoEncontradoError:
+    print("El usuario no fue encontrado")
