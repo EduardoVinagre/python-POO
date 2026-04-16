@@ -23,6 +23,12 @@ class Libro:
     def __str__(self) -> str:
         return f"{self.titulo} {self.autor} {self.isbn} {self.disponible} Es popular: {self.es_popular()}"
 
+    @classmethod
+    def crear_no_disponible(cls, titulo, autor, isbn):
+        cls(
+            titulo, autor, isbn, disponible=False
+        )
+
     def prestar(self):
         if not self.disponible:
             raise LibroNoDisponibleError("El libro no esta disponible")

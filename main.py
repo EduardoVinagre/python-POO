@@ -15,25 +15,29 @@ print("Bienvenido a Platzi Biblioteca")
 for libro in biblioteca.libros_disponibles():
     print(f" {libro.titulo} {libro.veces_prestado}")
 
-cedula = input("Digite el numero de cedula: ")
-try:
-    usuario = biblioteca.buscar_usuario(cedula)
-    print(usuario.cedula, usuario.nombre)
-except UsuarioNoEncontradoError:
-    print("El usuario no fue encontrado")
+# cedula = input("Digite el numero de cedula: ")
+# try:
+#     usuario = biblioteca.buscar_usuario(cedula)
+#     print(usuario.cedula, usuario.nombre)
+# except UsuarioNoEncontradoError:
+#     print("El usuario no fue encontrado")
 
-try: 
-    titulo = input("digita el titulo del libro: ")
-    libro = biblioteca.buscar_libro(titulo)
-    print(f"El libro que seleccionaste es: {libro}")
-except LibroNoDisponibleError as e:
-    print(e)
+# try: 
+#     titulo = input("digita el titulo del libro: ")
+#     libro = biblioteca.buscar_libro(titulo)
+#     print(f"El libro que seleccionaste es: {libro}")
+# except LibroNoDisponibleError as e:
+#     print(e)
 
-resultado = usuario.solicitar_libro(libro.titulo)
-print(f"\n{resultado}")
+# resultado = usuario.solicitar_libro(libro.titulo)
+# print(f"\n{resultado}")
 
-try:
-    resultado_prestar = libro.prestar()
-    print(f"\n{resultado_prestar}")
-except LibroNoDisponibleError as e:
-    print(e)
+# try:
+#     resultado_prestar = libro.prestar()
+#     print(f"\n{resultado_prestar}")
+# except LibroNoDisponibleError as e:
+#     print(e)
+
+
+resultado = Biblioteca.validar_isbn("12345657809")
+print(f"Es ISBN es valido: {resultado}")
