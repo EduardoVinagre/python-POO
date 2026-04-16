@@ -1,4 +1,5 @@
 from typing import Protocol
+from abc import ABC, abstractmethod
 from exceptions import LibroNotFoundError
 
 class SolicitanteProtocol(Protocol):
@@ -6,7 +7,13 @@ class SolicitanteProtocol(Protocol):
         """Metodo que debe implementar cualquier solicitante"""
         ...
 
-class Usuario:
+class UsuarioBase(ABC):
+    @abstractmethod
+    def solicitar_libro(self):
+        pass
+
+
+class Usuario(UsuarioBase):
     def __init__(self, nombre, cedula):
         self.nombre = nombre
         self.cedula = cedula
