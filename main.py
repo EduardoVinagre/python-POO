@@ -4,11 +4,14 @@ from libros import Libro, LibroDigital, LibroFisico
 from usuarios import Estudiante, Profesor
 from exceptions import UsuarioNoEncontradoError
 from data import data_libros, data_estudiantes
+from persistencia import Persistencia
 
 biblioteca = Biblioteca("Platzi Biblioteca")
 profesor = Profesor("Felipe","2122121")
 biblioteca.usuarios = [profesor] + data_estudiantes
 biblioteca.libros = data_libros
+persistencia = Persistencia()
+persistencia.guardar_datos(biblioteca)
 
 print("Bienvenido a Platzi Biblioteca")
 
