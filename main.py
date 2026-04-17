@@ -12,7 +12,7 @@ biblioteca.usuarios = [profesor] + data_estudiantes
 biblioteca.libros = data_libros
 persistencia = Persistencia()
 persistencia.guardar_datos(biblioteca)
-
+persistencia.cargar_datos()
 print("Bienvenido a Platzi Biblioteca")
 
 for libro in biblioteca.libros_disponibles():

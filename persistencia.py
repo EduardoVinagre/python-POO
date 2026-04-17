@@ -15,3 +15,9 @@ class Persistencia:
         }
         with open(self.archivo, "w", encoding="utf-8") as f:
             json.dump(datos, f, indent=4, ensure_ascii=False)
+
+
+    def cargar_datos(self):
+        with open(self.archivo, "r", encoding="utf-8") as f:
+            datos = json.load(f)
+        print(f"datos: {datos}")
